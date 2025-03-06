@@ -1,0 +1,307 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block metatags %}
+<title>Profile : College Connect</title>
+
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <h1> {{user.first_name}} {{user.last_name}} </h1>
+    <div class="row">
+        <!-- User details -->
+        <div class="col-md-4" style="padding:20px;">
+            <div class="bg-dusky mb-3 content">
+
+
+                <div class="row">
+                    <h3> Bio </h3>
+                    <span>
+                        <!-- bio -->
+                        {{student.bio}}
+                    </span>
+                </div>
+                <hr>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <span>SRN</span>
+                    </div>
+                    <div class="col-md-8">
+                        <span>{{student.student_id}}</span>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <span>Username</span>
+                    </div>
+                    <div class="col-md-8">
+                        <span> {{user.username}}</span>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <span>Department</span>
+                    </div>
+                    <div class="col-md-8">
+                        <span>{{student.department}}</span>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <span>Branch</span>
+                    </div>
+                    <div class="col-md-8">
+                        <span>{{student.branch}}</span>
+                    </div>
+                </div>
+
+                <hr>
+
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <span>Year of Passing</span>
+                    </div>
+                    <div class="col-md-8">
+                        <span>{{student.year_of_passing_out}}</span>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <span>Profile Link</span>
+                    </div>
+                    <div class="col-md-8">
+                        <a href="http://127.0.0.1:8000/account/profile/{{user.username}}">{{user.username}}</a>
+                    </div>
+                </div>
+
+                <hr>
+                {% if club_member %}
+                <div class="row">
+                    <div class="col-md-4">
+                        <span>Clubs</span>
+                    </div>
+                    <div class="col-md-8">
+                        {% for c in clubs %}
+                        {{c}} <span class="text-muted">|</span>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <hr>
+                {% endif %}
+
+                {% if student.is_mentor %}
+                <div class="row">
+                    <div class="col-md-4">
+                        <span>Resume</span>
+                    </div>
+                    <div class="col-md-8">
+                        <a href="{{mentor.resume.url}}"><span>View Resume</span></a>
+                    </div>
+                </div>
+                <hr>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <span>Domain</span>
+                    </div>
+                    <div class="col-md-8">
+                        {% for domain in mentor.domain.all %}
+                        <span>{{ domain }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                <hr>
+                {% endif %}
+                <div class="row">
+
+                    <div class="col-md-4">
+                        {% if student.show_number %}
+                        <span>
+                            <a href="{{student.whatsapp_link}}">
+                                <button type="submit" style="width:90%;padding:20px;margin:20px;border-radius:20px"
+                                    class="btn btn-success">
+                                    Chat
+                                </button>
+                            </a>
+                        </span>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- <hr> -->
+
+
+            </div>
+        </div>
+
+        <!-- User Posts -->
+        <div class="col-md-8">
+            <div class="row">
+
+            </div>
+            <div class="row">
+                <h1>My Posts </h1>
+                <div class="row">
+                    {% for p in post %}
+                    <!-- repeatable card -->
+                    <div class="card">
+                        <a class="feed-link" class="text-light" style="text-decoration:none;color:burlywood"
+                            href="/post/{{p.slug}}">
+
+                            <div class="row text-light container">
+                                <div class="col-md-10">
+                                    <h1>{{p.title}}</h1>
+                                </div>
+                                <div class="col-md-2">
+                                    <h3>{{p.user}}</h3>
+                                    <p class="text-medium text-muted">{{p.created_at}}</p>
+                                    <span>Tags: </span>
+                                    {% for t in p.tags.all %}
+                                    <span class="text-medium text-muted">
+                                        {{t.name}},
+                                    </span>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </a>
+
+                        <div class="post-content">
+                            {{p.content | safe}}
+                        </div>
+
+                        <div class="text-center" style="padding:10px">
+                            <a href="/post/{{p.slug}}" class="bg-charcoal-black">
+                                Read More
+                            </a><br>
+                        </div>
+
+                        <form class="text-center comment-card" method="post" action="/post/add-comment/{{p.slug}}">
+                            {% csrf_token %}
+
+                            <div class="row">
+
+                                <div class="col-md-10">
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="comment" name="comment"
+                                            placeholder="Add your comment here ..." />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <button type="submit" style="width:90%;padding:20px;margin:25px;border-radius:20px"
+                                        class="btn btn-success">Comment</button>
+                                </div>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <h1>My Resources </h1>
+        {% for resource in resources %}
+
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title">{{ resource.title }}</h2>
+                <span class="text-muted">
+                    Uploaded on: {{ resource.uploaded_at }} |
+                    Uploaded by : <a href="/account/profile/{{resource.user.username}}">{{resource.user.username}}</a> |
+                    Tags:
+                    {% for tag in resource.tags.all %}
+                    <a href="/resource/tag/{{tag.slug}}">{{tag.name}}</a>
+                    {% endfor %}
+                </span>
+                <div class="row">
+                    <div class="col">
+                        <a href="{{resource.files.url}}">
+                            <button type="submit" style="width:90%;padding:20px;margin:20px;border-radius:20px"
+                                class="btn btn-success">View Resource</button>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a href="/resource/download/{{resource.id}}">
+                            <button type="submit" style="width:90%;padding:20px;margin:20px;border-radius:20px"
+                                id='downloadButton' class="btn btn-success">Download</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+</div>
+</div>
+
+<script>
+    function removeImgTags(text) {
+        // Use a regular expression to match and remove <img> tags
+        var regex = /<img[^>]*>/g;
+
+        // Replace the matched <img> tags with an empty string
+        return text.replace(regex, '');
+    }
+
+    function removeHtmlTagsKeepP(text) {
+        // Use a regular expression to match all HTML tags except <p>
+        var regex = /<[^>]+>(?!<\/?p>)/g;
+
+        // Replace the matched tags with an empty string
+        return text.replace(regex, '');
+    }
+
+
+    // limit post-content class to 100 words
+    var postContents = document.getElementsByClassName('post-content')
+    console.log(postContents)
+    for (var i = 0; i < postContents.length; i++) {
+        var content = postContents[i].innerHTML
+        content = removeImgTags(content)
+        content = removeHtmlTagsKeepP(content)
+
+        var words = content.split(' ')
+        // remove tags
+
+        var newContent = ''
+        for (var j = 0; j < 100; j++) {
+            if (words[j] != undefined){
+                newContent += words[j] + ' '
+            }
+        }
+        postContents[i].innerHTML = newContent + '...'
+    }
+
+</script>
+
+
+{% endblock %}

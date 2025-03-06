@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat with AI</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: #f3f2ef;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        #chat-container {
+            width: 50%;
+            max-width: 700px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 85vh;
+        }
+        #chat-header {
+            background: #0077B5;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        #chat-header::after {
+            content: " Welcome to Campus Connect's EduAI Your AI-powered assistant for insightful conversations";
+            display: block;
+            font-size: 0.9em;
+            font-weight: normal;
+            margin-top: 5px;
+            opacity: 0.8;
+        }
+        #chat-history {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background: #eef3f8;
+        }
+        .message {
+            max-width: 75%;
+            margin: 8px 10px;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 1.1em;
+        }
+        .user-message {
+            background: #0077B5;
+            color: white;
+            align-self: flex-end;
+            text-align: right;
+        }
+        .bot-message {
+            background: white;
+            color: #333;
+            border: 1px solid #0077B5;
+            align-self: flex-start;
+        }
+        #chat-input {
+            display: flex;
+            padding: 12px;
+            background: white;
+            border-top: 1px solid #ddd;
+        }
+        #query {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1em;
+        }
+        button {
+            background: #0077B5;
+            color: white;
+            border: none;
+            padding: 12px 18px;
+            margin-left: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #005582;
+        }
+        #file-upload-container {
+            display: flex;
+            padding: 12px;
+            border-top: 1px solid #ddd;
+            background: white;
+            align-items: center;
+            justify-content: space-between;
+        }
+        #file {
+            flex: 1;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 6px;
+        }
+    </style>
+</head>
+<body>
+    <div id="chat-container">
+        <div id="chat-header">Chat with Campus Connect's EduAI</div>
+        <div id="chat-history"></div>
+        
+        <div id="file-upload-container">
+            <input type="file" id="file" accept=".pdf,.docx,.txt,.ppt,.pptx">
+            <button onclick="uploadFile()">Upload</button>
+        </div>
+
+        <div id="chat-input">
+            <input type="text" id="query" placeholder="Ask me anything...">
+            <button onclick="askChatbot('text')">Send</button>
+            <button onclick="askChatbot('document')">Ask from File</button>
+            <button onclick="askChatbot('summary')">Summarize</button>
+        </div>
+    </div>
+
+    <script>
+        async function askChatbot(type) {
+            const query = document.getElementById("query").value;
+            if (!query && type !== "summary") return;
+
+            const chatHistory = document.getElementById("chat-history");
+
+            if (type !== "summary") {
+                const userMsg = document.createElement("div");
+                userMsg.classList.add("message", "user-message");
+                userMsg.textContent = "You: " + query;
+                chatHistory.appendChild(userMsg);
+            }
+
+            const response = await fetch("/chatbot/ask/", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ query, type }),
+            });
+
+            const data = await response.json();
+            const botMsg = document.createElement("div");
+            botMsg.classList.add("message", "bot-message");
+            botMsg.textContent = "AI: " + (data.response || data.error);
+            
+            chatHistory.appendChild(botMsg);
+            document.getElementById("query").value = "";
+            chatHistory.scrollTop = chatHistory.scrollHeight;
+        }
+
+        async function uploadFile() {
+            const fileInput = document.getElementById("file");
+            const file = fileInput.files[0];
+
+            if (!file) {
+                alert("Please select a file.");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append("file", file);
+
+            const response = await fetch("/chatbot/upload/", {
+                method: "POST",
+                body: formData,
+            });
+
+            const data = await response.json();
+            if (data.message) {
+                alert("File uploaded successfully!");
+            } else {
+                alert("Error: " + data.error);
+            }
+
+            fileInput.value = "";
+        }
+    </script>
+</body>
+</html>

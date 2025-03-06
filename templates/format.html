@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block metatags %}
+<title>Clubs : College Connect</title>
+<style>
+    /* Pastel Color Palette */
+    :root {
+        --primary-bg: #d4e2f0; /* Light Blue */
+        --secondary-bg: #f5d6e3; /* Soft Pink */
+        --accent-color: #c69ac9; /* Lavender */
+        --text-color: #333; /* Dark Gray */
+        --card-bg: #ffffff; /* White */
+        --border-color: #ccc; /* Light Gray */
+    }
+
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: var(--primary-bg);
+        color: var(--text-color);
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: 50px auto;
+        background: var(--card-bg);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        border: 1px solid var(--border-color);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    
+    
+</div>
+
+{% endblock %}
