@@ -1,0 +1,337 @@
+body {
+    font-family: sans-serif;
+    background-color: #F3F2EF; /* LinkedIn Light Gray */
+    color: #191919; /* Black Text */
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 2000px;
+    margin: 70px auto;
+    padding: 50px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 4px;
+}
+
+/* Header Styles */
+.header {
+    background-color: #0A66C2; /* LinkedIn Blue */
+    color: #ffffff;
+    padding: 20px;
+}
+
+p {
+    font-size: medium;
+    color: #191919; /* Black Text */
+    align-items: justify;
+}
+
+h1 {
+    font-size: 40px;
+    color: #191919; /* Black Text */
+    padding: 10px;
+}
+
+.header h1 {
+    font-size: 40px;
+    padding: 10px;
+}
+
+/* Background Colors */
+.bg-dusky {
+    background-color: #F3F2EF;
+}
+
+.bg-charcoal-black {
+    background-color: #FFFFFF;
+}
+
+.bg-black {
+    background-color: #F8F9FA;
+}
+
+.bg-cloudy {
+    background-color: #F3F2EF;
+}
+
+/* Text Colors */
+.text-white {
+    color: #191919; /* Black Text */
+}
+
+.text-black {
+    color: #191919; /* Black Text */
+}
+
+.text-offwhite {
+    color: #555;
+}
+
+/* Navigation Styles */
+.navbar {
+    background-color: #0A66C2; /* LinkedIn Blue */
+    color: #ffffff;
+    padding: 10px;
+}
+
+.navbar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.navbar li {
+    display: inline;
+    margin-right: 20px;
+}
+
+.navbar div form ul {
+    list-style: none;
+    display: inline;
+    padding: 0;
+}
+
+.navbar div form ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: black !important;
+}
+
+/* Main Content Styles */
+.main-content {
+    padding: 20px;
+}
+
+/* Search Button Styles */
+.search {
+    background-color: #E6EEFF;
+    color: #191919; /* Black Text */
+    padding: 5px;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 20px;
+}
+
+.search:hover {
+    background-color: #004182; /* LinkedIn Dark Blue */
+}
+
+/* Button Styles */
+.button {
+    background-color: #FFFFFF;
+    color: #191919; /* Black Text */
+    padding: 10px;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 10px;
+    margin: 5px;
+    border: 1px solid #0A66C2;
+}
+
+.button:hover {
+    background-color: #D9E6FF;
+}
+
+.wide-btn {
+    width: 90%;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 20px;
+}
+
+/* Form Styles */
+.form {
+    margin: 20px;
+    padding: 20px;
+}
+
+.input, .textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #0A66C2;
+    border-radius: 20px;
+    color: #191919; /* Black Text */
+}
+
+.form button {
+    background-color: #0A66C2;
+    color: #ffffff;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.form button:hover {
+    background-color: #004182;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #0A66C2;
+    border-radius: 20px;
+    color: #191919; /* Black Text */
+}
+
+.form-group {
+    margin: 20px;
+    padding: 20px;
+}
+
+/* Footer Styles */
+.footer {
+    background-color: #0A66C2;
+    color: black !important;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Top Navigation */
+.top-navigation-bar {
+    overflow: hidden;
+}
+
+/* Links in Navigation Bar */
+.top-navigation-bar a {
+    color: #191919; /* Black Text */
+}
+
+/* Hover Effect for Links */
+.top-navigation-bar a:hover {
+    background-color: #D9E6FF;
+    color: #0A66C2;
+}
+
+/* Active/Current Link */
+.top-navigation-bar a.active {
+    background-color: #D9E6FF;
+    color: #0A66C2;
+}
+
+/* Full-width Input Fields */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="date"],
+textarea {
+    width: 100%;
+    padding: 15px;
+    margin: 2px 0;
+    font-size: 16px;
+    border: 1px solid #0A66C2;
+    background: #F3F2EF;
+    color: #191919; /* Black Text */
+}
+
+/* Input Focus Styling */
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus {
+    background-color: #E6F0FF;
+    outline: none;
+}
+
+/* Alert Message Box */
+.alert {
+    padding: 20px;
+    background-color: #f44336; /* Red */
+    color: white;
+    margin-bottom: 15px;
+    opacity: 1;
+    transition: opacity 0.6s;
+}
+
+/* Close Button for Alert */
+.close-button {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Close Button Hover Effect */
+.close-button:hover {
+    color: black;
+}
+
+/* Box Element Styling */
+.box-element {
+    box-shadow: 0 0 16px rgba(10, 102, 194, 0.5);
+    background-color: #F3F2EF;
+    border-radius: 4px;
+    padding: 10px;
+    color: #191919; /* Black Text */
+}
+
+/* Post app css */
+.feed-link {
+    color: #191919; /* Black Text */
+    text-decoration: none;
+}
+
+.feed-link:hover {
+    background-color: #E6F0FF;
+}
+
+.post-content {
+    align-items: justify;
+    margin: 20px;
+    padding: 10px;
+    color: #191919; /* Black Text */
+}
+
+.comment-card {
+    background-color: #F3F2EF;
+    box-shadow: 0 0 16px rgba(10, 102, 194, 0.2);
+    border-radius: 1px;
+    padding: 10px;
+    margin: 10px;
+    color: #191919; /* Black Text */
+}
+
+.card {
+    background-color: #FFFFFF;
+    box-shadow: 0 0 16px rgba(10, 102, 194, 0.3);
+    border-radius: 4px;
+    padding: 20px;
+    margin: 10px;
+    color: #191919; /* Black Text */
+}
+
+/* Justify content */
+.justify-center {
+    justify-content: center;
+}
+
+.justify-left {
+    justify-content: flex-start;
+}
+
+.justify-right {
+    justify-content: flex-end;
+}
+
+/* Dropdown item */
+.dropdown-item {
+    background-color: #E6F0FF;
+    color: #191919; /* Black Text */
+}
+
+.dropdown-item:hover {
+    background-color: #BFD6FF;
+    color: #004182;
+}
